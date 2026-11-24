@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes | MAREA Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'DM Sans', sans-serif; background: #f8f6f1; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+
+<body class="min-h-screen text-[#263b49]">
+
+<div class="min-h-screen flex">
+
+    <!-- MENÚ LATERAL -->
+    <aside class="w-64 bg-[#173044] text-white hidden md:flex flex-col">
+
+        <div class="px-7 py-8 border-b border-white/10">
+            <h1 class="text-3xl tracking-widest">MAREA</h1>
+            <p class="text-xs text-white/50 mt-2 tracking-widest uppercase">
+                Panel administrativo
+            </p>
+        </div>
+
+        <nav class="flex-1 px-4 py-7 space-y-2">
+
+            <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:bg-white/10 transition">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="habitaciones.php" class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:bg-white/10 transition">
+                <span>▣</span> Habitaciones
+            </a>
+
+            <a href="reservas.php" class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:bg-white/10 transition">
+                <span>▤</span> Reservas
+            </a>
+
+            <a href="pagos.php" class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:bg-white/10 transition">
+                <span>＄</span> Pagos
+            </a>
+
+            <a href="clientes.php" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#b38b4b] text-white">
+                <span>♙</span> Clientes
+            </a>
+
+            <a href="resenas.php"
+                class="block shrink-0 px-4 py-3 text-sm text-white/65 transition hover:bg-white/10 hover:text-white">
+                ★ &nbsp; Reseñas
+            </a>
+
+        </nav>
+
+        <div class="p-5 border-t border-white/10">
+            <a href="../index.php" class="text-sm text-white/60 hover:text-white transition">
+                ← Volver al sitio
+            </a>
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="flex-1 min-w-0">
+
+        <!-- ENCABEZADO -->
+        <header class="bg-white border-b border-[#e8e3d9] px-6 md:px-10 py-5 flex justify-between items-center">
+            <div>
+                <p class="text-xs uppercase tracking-widest text-[#b38b4b]">Administración</p>
+                <h2 class="text-xl font-semibold mt-1">Clientes</h2>
+            </div>
+
+            <div class="text-right">
+                <p class="text-sm font-semibold">Administrador</p>
+                <p class="text-xs text-gray-400">Panel MAREA</p>
+            </div>
+        </header>
+
+        <div class="p-6 md:p-10">
+
+            <!-- TÍTULO -->
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl text-[#173044]">
+                    Gestión de clientes
+                </h1>
+                <p class="text-gray-500 mt-2 text-sm">
+                    Consulta la información de los huéspedes registrados en MAREA.
+                </p>
+            </div>
+
+            <!-- ESTADÍSTICAS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mb-8">
+
+                <div class="bg-white rounded-xl p-6 border border-[#e8e3d9]">
+                    <p class="text-sm text-gray-500">Total de clientes</p>
+                    <h3 class="text-3xl text-[#173044] mt-3">96</h3>
+                    <p class="text-xs text-gray-400 mt-2">Usuarios registrados</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-[#e8e3d9]">
+                    <p class="text-sm text-gray-500">Clientes activos</p>
+                    <h3 class="text-3xl text-green-700 mt-3">82</h3>
+                    <p class="text-xs text-gray-400 mt-2">Cuentas disponibles</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-[#e8e3d9]">
+                    <p class="text-sm text-gray-500">Nuevos clientes</p>
+                    <h3 class="text-3xl text-[#b38b4b] mt-3">14</h3>
+                    <p class="text-xs text-gray-400 mt-2">Registros recientes</p>
+                </div>
+
+            </div>
+
+            <!-- TABLA -->
+            <section class="bg-white rounded-xl border border-[#e8e3d9] overflow-hidden">
+
+                <div class="p-6 border-b border-[#eee9df]">
+                    <h2 class="text-xl text-[#173044]">Directorio de clientes</h2>
+                    <p class="text-sm text-gray-400 mt-1">
+                        Información general de los huéspedes registrados.
+                    </p>
+                </div>
+
+                <!-- BUSCADOR -->
+                <div class="p-5 flex flex-col sm:flex-row gap-3 justify-between">
+
+                    <input
+                        type="text"
+                        id="buscarCliente"
+                        placeholder="Buscar cliente por nombre o correo..."
+                        class="border border-[#e8e3d9] rounded-lg px-4 py-2.5 text-sm w-full sm:max-w-md focus:outline-none focus:border-[#b38b4b]"
+                    >
+
+                    <select
+                        id="filtroEstado"
+                        class="border border-[#e8e3d9] rounded-lg px-4 py-2.5 text-sm text-gray-600 focus:outline-none"
+                    >
+                        <option value="todos">Todos los clientes</option>
+                        <option value="activo">Activos</option>
+                        <option value="inactivo">Inactivos</option>
+                    </select>
+
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+
+                        <thead class="bg-[#f8f6f1] text-gray-500 uppercase text-xs tracking-wider">
+                            <tr>
+                                <th class="px-6 py-4">Cliente</th>
+                                <th class="px-6 py-4">Correo electrónico</th>
+                                <th class="px-6 py-4">Teléfono</th>
+                                <th class="px-6 py-4">Reservas</th>
+                                <th class="px-6 py-4">Estado</th>
+                                <th class="px-6 py-4">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tablaClientes" class="divide-y divide-[#eee9df]">
+
+                            <tr class="fila-cliente hover:bg-[#faf9f6]" data-estado="activo">
+                                <td class="px-6 py-5 font-semibold">María López</td>
+                                <td class="px-6 py-5">maria@email.com</td>
+                                <td class="px-6 py-5 whitespace-nowrap">669 123 4567</td>
+                                <td class="px-6 py-5">5</td>
+                                <td class="px-6 py-5">
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Activo</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <button type="button" class="text-[#b38b4b] font-semibold">Ver</button>
+                                </td>
+                            </tr>
+
+                            <tr class="fila-cliente hover:bg-[#faf9f6]" data-estado="activo">
+                                <td class="px-6 py-5 font-semibold">Carlos Ramírez</td>
+                                <td class="px-6 py-5">carlos@email.com</td>
+                                <td class="px-6 py-5 whitespace-nowrap">669 234 5678</td>
+                                <td class="px-6 py-5">3</td>
+                                <td class="px-6 py-5">
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Activo</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <button type="button" class="text-[#b38b4b] font-semibold">Ver</button>
+                                </td>
+                            </tr>
+
+                            <tr class="fila-cliente hover:bg-[#faf9f6]" data-estado="inactivo">
+                                <td class="px-6 py-5 font-semibold">Ana Martínez</td>
+                                <td class="px-6 py-5">ana@email.com</td>
+                                <td class="px-6 py-5 whitespace-nowrap">669 345 6789</td>
+                                <td class="px-6 py-5">2</td>
+                                <td class="px-6 py-5">
+                                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">Inactivo</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <button type="button" class="text-[#b38b4b] font-semibold">Ver</button>
+                                </td>
+                            </tr>
+
+                            <tr class="fila-cliente hover:bg-[#faf9f6]" data-estado="activo">
+                                <td class="px-6 py-5 font-semibold">José Hernández</td>
+                                <td class="px-6 py-5">jose@email.com</td>
+                                <td class="px-6 py-5 whitespace-nowrap">669 456 7890</td>
+                                <td class="px-6 py-5">4</td>
+                                <td class="px-6 py-5">
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Activo</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <button type="button" class="text-[#b38b4b] font-semibold">Ver</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <p id="sinResultados" class="hidden p-8 text-center text-sm text-gray-400">
+                        No se encontraron clientes.
+                    </p>
+                </div>
+
+                <div class="p-5 border-t border-[#eee9df] flex justify-between items-center text-xs text-gray-400">
+                    <span id="contadorClientes">Mostrando 4 clientes de ejemplo</span>
+                    <span>Vista de demostración</span>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<script>
+    const buscador = document.getElementById('buscarCliente');
+    const filtroEstado = document.getElementById('filtroEstado');
+    const filas = document.querySelectorAll('.fila-cliente');
+    const sinResultados = document.getElementById('sinResultados');
+    const contador = document.getElementById('contadorClientes');
+
+    function filtrarClientes() {
+        const busqueda = buscador.value.toLowerCase().trim();
+        const estadoSeleccionado = filtroEstado.value;
+
+        let visibles = 0;
+
+        filas.forEach(fila => {
+            const nombre = fila.cells[0].textContent.toLowerCase();
+            const correo = fila.cells[1].textContent.toLowerCase();
+            const estado = fila.dataset.estado;
+
+            const coincideTexto =
+                nombre.includes(busqueda) || correo.includes(busqueda);
+
+            const coincideEstado =
+                estadoSeleccionado === 'todos' || estado === estadoSeleccionado;
+
+            const mostrar = coincideTexto && coincideEstado;
+
+            fila.style.display = mostrar ? '' : 'none';
+
+            if (mostrar) visibles++;
+        });
+
+        sinResultados.classList.toggle('hidden', visibles !== 0);
+        contador.textContent = `Mostrando ${visibles} de ${filas.length} clientes de ejemplo`;
+    }
+
+    buscador.addEventListener('input', filtrarClientes);
+    filtroEstado.addEventListener('change', filtrarClientes);
+</script>
+
+</body>
+</html>
